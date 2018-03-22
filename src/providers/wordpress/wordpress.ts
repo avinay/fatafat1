@@ -11,6 +11,11 @@ export class WordpressProvider {
 
   }
 
+  retrievePosts(){
+    console.log("test1");
+    return this.http.get(this.baseUrl + 'posts')
+    .map(res => res.json());
+  }
   retrieveCategories(){
     return this.http.get(this.baseUrl + 'categories')
     .map(res => res.json());

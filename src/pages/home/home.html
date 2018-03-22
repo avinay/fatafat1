@@ -10,6 +10,9 @@
   <ion-card (swipe)="swipeEvent($event)">
     <div class="newsitem">
       <h2>{{ name }}</h2>
+      <div class="image">
+        <img src="{{image}}" />
+      </div>
       <p [innerHTML]="content"></p>
     </div>
  </ion-card>

@@ -1,6 +1,6 @@
 webpackJsonp([0],{
 
-/***/ 110:
+/***/ 109:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -13,11 +13,11 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 110;
+webpackEmptyAsyncContext.id = 109;
 
 /***/ }),
 
-/***/ 152:
+/***/ 151:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -30,11 +30,11 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 152;
+webpackEmptyAsyncContext.id = 151;
 
 /***/ }),
 
-/***/ 196:
+/***/ 195:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -43,7 +43,6 @@ webpackEmptyAsyncContext.id = 152;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_wordpress_wordpress__ = __webpack_require__(99);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_category_list_category_list__ = __webpack_require__(197);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_http__ = __webpack_require__(100);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -57,37 +56,34 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
 var HomePage = /** @class */ (function () {
-    function HomePage(navCtrl, wordpress, http) {
-        var _this = this;
+    function HomePage(navCtrl, wordpress) {
         this.navCtrl = navCtrl;
         this.wordpress = wordpress;
-        this.http = http;
-        this.count = 0;
-        this.http.get('https://avinay.com/fatafat//wp-json/wp/v2/posts').subscribe(function (data) {
-            console.log("mydata", data);
-            var myJson = data.json();
-            _this.jsondata = myJson;
-            console.log("myjson:", myJson);
-            //this.name = myJson[0].title.rendered;
-            //console.log("title:", name);
-        });
+        this.count = 1;
     }
-    HomePage.prototype.swipeEvent = function (e) {
-        this.name = this.jsondata[this.count].title.rendered;
-        this.content = this.jsondata[this.count].content.rendered;
-        this.count = this.count + 1;
-        console.log("count", this.count);
-        if (this.count == 5) {
-            this.count = 0;
-        }
-    };
     HomePage.prototype.ionViewDidLoad = function () {
         var _this = this;
         this.wordpress.retrieveCategories().subscribe(function (results) {
             _this.categories = results;
         });
+        this.wordpress.retrievePosts().subscribe(function (results) {
+            _this.posts = results;
+            console.log(_this.posts);
+            _this.name = _this.posts[0].title.rendered;
+            _this.content = _this.posts[0].content.rendered;
+            _this.image = _this.posts[0].better_featured_image.source_url;
+        });
+    };
+    HomePage.prototype.swipeEvent = function (e) {
+        this.name = this.posts[this.count].title.rendered;
+        this.content = this.posts[this.count].content.rendered;
+        this.image = this.posts[this.count].better_featured_image.source_url;
+        this.count = this.count + 1;
+        console.log("count", this.count);
+        if (this.count == 5) {
+            this.count = 0;
+        }
     };
     HomePage.prototype.loadCategory = function (id) {
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__pages_category_list_category_list__["a" /* CategoryListPage */], {
@@ -96,9 +92,9 @@ var HomePage = /** @class */ (function () {
     };
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"C:\sper\newshots\sfat\fatafat\src\pages\home\home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n    S Fatafat App\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <ion-card (swipe)="swipeEvent($event)">\n    <div class="newsitem">\n      <h2>{{ name }}</h2>\n      <p [innerHTML]="content"></p>\n    </div>\n </ion-card>\n\n</ion-content>\n'/*ion-inline-end:"C:\sper\newshots\sfat\fatafat\src\pages\home\home.html"*/
+            selector: 'page-home',template:/*ion-inline-start:"C:\sper\newshots\sfat\fatafat\src\pages\home\home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n    S Fatafat App\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <ion-card (swipe)="swipeEvent($event)">\n    <div class="newsitem">\n      <h2>{{ name }}</h2>\n      <div class="image">\n        <img src="{{image}}" />\n      </div>\n      <p [innerHTML]="content"></p>\n    </div>\n </ion-card>\n\n</ion-content>\n'/*ion-inline-end:"C:\sper\newshots\sfat\fatafat\src\pages\home\home.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__providers_wordpress_wordpress__["a" /* WordpressProvider */], __WEBPACK_IMPORTED_MODULE_4__angular_http__["a" /* Http */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__providers_wordpress_wordpress__["a" /* WordpressProvider */]])
     ], HomePage);
     return HomePage;
 }());
@@ -220,11 +216,11 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(192);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__ = __webpack_require__(195);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(191);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__ = __webpack_require__(194);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(272);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_home_home__ = __webpack_require__(196);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_http__ = __webpack_require__(100);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_home_home__ = __webpack_require__(195);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_http__ = __webpack_require__(196);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__providers_wordpress_wordpress__ = __webpack_require__(99);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_category_list_category_list__ = __webpack_require__(197);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_post_post__ = __webpack_require__(198);
@@ -295,9 +291,9 @@ var AppModule = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(195);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(192);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(196);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(194);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(191);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(195);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -340,7 +336,7 @@ var MyApp = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return WordpressProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(100);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(196);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(273);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -360,6 +356,11 @@ var WordpressProvider = /** @class */ (function () {
         this.http = http;
         this.baseUrl = "https://avinay.com/fatafat/wp-json/wp/v2/";
     }
+    WordpressProvider.prototype.retrievePosts = function () {
+        console.log("test1");
+        return this.http.get(this.baseUrl + 'posts')
+            .map(function (res) { return res.json(); });
+    };
     WordpressProvider.prototype.retrieveCategories = function () {
         return this.http.get(this.baseUrl + 'categories')
             .map(function (res) { return res.json(); });
