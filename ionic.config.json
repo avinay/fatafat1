@@ -1,0 +1,8 @@
+{
+  "name": "fatafat",
+  "app_id": "52a7df36",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
