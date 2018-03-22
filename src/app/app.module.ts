@@ -10,6 +10,7 @@ import { HttpModule } from '@angular/http';
 import { WordpressProvider } from '../providers/wordpress/wordpress';
 import { CategoryListPage } from '../pages/category-list/category-list';
 import { PostPage } from './../pages/post/post';
+import { IonicSwipeAllModule } from 'ionic-swipe-all';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { PostPage } from './../pages/post/post';
   imports: [
     BrowserModule,
     HttpModule,
+    IonicSwipeAllModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
