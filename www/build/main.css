@@ -25677,3 +25677,13 @@ ion-navbar.toolbar {
   min-height: calc(46px + constant(safe-area-inset-bottom));
   min-height: calc(46px + env(safe-area-inset-bottom));
 }
+
+.card.card-md {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+.newsitem {
+  padding: 10px;
+}

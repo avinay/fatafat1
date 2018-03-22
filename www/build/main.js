@@ -75,14 +75,12 @@ var HomePage = /** @class */ (function () {
         });
     }
     HomePage.prototype.swipeEvent = function (e) {
-        if (e.direction == 4 || e.direction == 2 || e.direction == 8 || e.direction == 16) {
-            this.name = this.jsondata[this.count].title.rendered;
-            this.content = this.jsondata[this.count].content.rendered;
-            this.count = this.count + 1;
-            console.log("count", this.count);
-            if (this.count == 5) {
-                this.count = 0;
-            }
+        this.name = this.jsondata[this.count].title.rendered;
+        this.content = this.jsondata[this.count].content.rendered;
+        this.count = this.count + 1;
+        console.log("count", this.count);
+        if (this.count == 5) {
+            this.count = 0;
         }
     };
     HomePage.prototype.ionViewDidLoad = function () {
@@ -98,12 +96,11 @@ var HomePage = /** @class */ (function () {
     };
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"C:\sper\newshots\sfat\fatafat\src\pages\home\home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n    S Fatafat App\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content (swipe)="swipeEvent($event)" padding>\n  <h2>{{ name }}</h2>\n<p [innerHTML]="content"></p>\n</ion-content>\n'/*ion-inline-end:"C:\sper\newshots\sfat\fatafat\src\pages\home\home.html"*/
+            selector: 'page-home',template:/*ion-inline-start:"C:\sper\newshots\sfat\fatafat\src\pages\home\home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n    S Fatafat App\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <ion-card (swipe)="swipeEvent($event)">\n    <div class="newsitem">\n      <h2>{{ name }}</h2>\n      <p [innerHTML]="content"></p>\n    </div>\n </ion-card>\n\n</ion-content>\n'/*ion-inline-end:"C:\sper\newshots\sfat\fatafat\src\pages\home\home.html"*/
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__providers_wordpress_wordpress__["a" /* WordpressProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_wordpress_wordpress__["a" /* WordpressProvider */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__angular_http__["a" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__angular_http__["a" /* Http */]) === "function" && _c || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__providers_wordpress_wordpress__["a" /* WordpressProvider */], __WEBPACK_IMPORTED_MODULE_4__angular_http__["a" /* Http */]])
     ], HomePage);
     return HomePage;
-    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=home.js.map

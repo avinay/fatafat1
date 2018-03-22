@@ -27,7 +27,7 @@ export class HomePage {
   }
 
   swipeEvent(e) {
-     if (e.direction == 4 || e.direction == 2 || e.direction == 8 || e.direction == 16) {
+
       this.name = this.jsondata[this.count].title.rendered;
       this.content = this.jsondata[this.count].content.rendered;
       this.count = this.count + 1;
@@ -35,7 +35,6 @@ export class HomePage {
       if(this.count == 5){
         this.count = 0;
       }
-     }
 
    }
   ionViewDidLoad(){
