@@ -13,7 +13,7 @@ export class WordpressProvider {
 
   retrievePosts(){
     console.log("test1");
-    return this.http.get(this.baseUrl + 'posts')
+    return this.http.get(this.baseUrl + 'posts?per_page=20')
     .map(res => res.json());
   }
   retrieveCategories(){

@@ -25684,10 +25684,22 @@ ion-navbar.toolbar {
   margin: 0;
 }
 
-.newsitem {
-  padding: 10px;
-}
-
 .image img {
   max-width: 100%;
+}
+
+.newscontainer {
+  position: relative;
+}
+
+.newscontainer .refbtn {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.newscontainer .catbtn {
+  position: absolute;
+  left: 10px;
+  top: 10px;
 }

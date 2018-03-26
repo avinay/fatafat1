@@ -11,14 +11,23 @@ export class CategoryListPage {
 
   categoryId: number;
   posts: any = [];
+  categories: any = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public wordpress: WordpressProvider) {
-    this.categoryId = this.navParams.get("categoryId");
+    this.wordpress.retrieveCategories().subscribe(results => {
+      this.categories = results;
+      console.log("cate", this.categories);
+    });
   }
 
   ionViewDidLoad() {
-    this.wordpress.retrievePostsInCategory(this.categoryId).subscribe(results => {
-      this.posts = results;
+
+  }
+
+  loadCategory(id: number){
+    console.log("catid", id);
+    this.navCtrl.push(PostPage, {
+      categoryId: id
     });
   }
 

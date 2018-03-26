@@ -44,6 +44,11 @@ export class HomePage {
       }
    }
 
+   openCategories(){
+     this.navCtrl.push(CategoryListPage);
+   }
+
+
   loadCategory(id: number){
     this.navCtrl.push(CategoryListPage, {
       categoryId: id

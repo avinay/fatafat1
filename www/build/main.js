@@ -41,7 +41,7 @@ webpackEmptyAsyncContext.id = 151;
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_wordpress_wordpress__ = __webpack_require__(99);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_wordpress_wordpress__ = __webpack_require__(50);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_category_list_category_list__ = __webpack_require__(197);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -85,6 +85,9 @@ var HomePage = /** @class */ (function () {
             this.count = 0;
         }
     };
+    HomePage.prototype.openCategories = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__pages_category_list_category_list__["a" /* CategoryListPage */]);
+    };
     HomePage.prototype.loadCategory = function (id) {
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__pages_category_list_category_list__["a" /* CategoryListPage */], {
             categoryId: id
@@ -92,7 +95,7 @@ var HomePage = /** @class */ (function () {
     };
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"C:\sper\newshots\sfat\fatafat\src\pages\home\home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n    S Fatafat App\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <ion-card (swipe)="swipeEvent($event)">\n    <div class="newsitem">\n      <h2>{{ name }}</h2>\n      <div class="image">\n        <img src="{{image}}" />\n      </div>\n      <p [innerHTML]="content"></p>\n    </div>\n </ion-card>\n\n</ion-content>\n'/*ion-inline-end:"C:\sper\newshots\sfat\fatafat\src\pages\home\home.html"*/
+            selector: 'page-home',template:/*ion-inline-start:"C:\sper\newshots\sfat\fatafat\src\pages\home\home.html"*/'\n\n<ion-content class="newscontainer">\n  <button ion-button float-left class="catbtn">\n    <ion-icon name="menu" (click)="openCategories()"></ion-icon>\n  </button>\n  <button ion-button float-right class="refbtn">\n    <ion-icon name="refresh"></ion-icon>\n  </button>\n  <ion-card (swipe)="swipeEvent($event)">\n    <div class="newsitem">\n      <div class="image">\n        <img src="{{image}}" />\n      </div>\n      <h2>{{ name }}</h2>\n      <p [innerHTML]="content"></p>\n    </div>\n </ion-card>\n\n</ion-content>\n'/*ion-inline-end:"C:\sper\newshots\sfat\fatafat\src\pages\home\home.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__providers_wordpress_wordpress__["a" /* WordpressProvider */]])
     ], HomePage);
@@ -110,7 +113,7 @@ var HomePage = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CategoryListPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(34);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_wordpress_wordpress__ = __webpack_require__(99);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_wordpress_wordpress__ = __webpack_require__(50);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__post_post__ = __webpack_require__(198);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -127,16 +130,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var CategoryListPage = /** @class */ (function () {
     function CategoryListPage(navCtrl, navParams, wordpress) {
+        var _this = this;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.wordpress = wordpress;
         this.posts = [];
-        this.categoryId = this.navParams.get("categoryId");
+        this.categories = [];
+        this.wordpress.retrieveCategories().subscribe(function (results) {
+            _this.categories = results;
+            console.log("cate", _this.categories);
+        });
     }
     CategoryListPage.prototype.ionViewDidLoad = function () {
-        var _this = this;
-        this.wordpress.retrievePostsInCategory(this.categoryId).subscribe(function (results) {
-            _this.posts = results;
+    };
+    CategoryListPage.prototype.loadCategory = function (id) {
+        console.log("catid", id);
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__post_post__["a" /* PostPage */], {
+            categoryId: id
         });
     };
     CategoryListPage.prototype.openPost = function (post) {
@@ -146,7 +156,7 @@ var CategoryListPage = /** @class */ (function () {
     };
     CategoryListPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-category-list',template:/*ion-inline-start:"C:\sper\newshots\sfat\fatafat\src\pages\category-list\category-list.html"*/'<ion-header>\n\n  <ion-navbar>\n    <ion-title>Posts</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n  <ion-list *ngIf="posts.length">\n    <ion-item *ngFor="let post of posts" (click)="openPost(post)">\n      <h3>{{ post.title.rendered }}</h3>\n    </ion-item>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"C:\sper\newshots\sfat\fatafat\src\pages\category-list\category-list.html"*/,
+            selector: 'page-category-list',template:/*ion-inline-start:"C:\sper\newshots\sfat\fatafat\src\pages\category-list\category-list.html"*/'<ion-header>\n\n  <ion-navbar>\n    <ion-title>Posts</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n  <ion-card>\n    <ion-card-header>\n      Explore Categories\n    </ion-card-header>\n\n  <ion-list *ngIf="categories.length">\n    <button ion-item col-6 *ngFor="let category of categories" (click)="loadCategory(category?.id)">\n      <ion-icon name="medical" item-start></ion-icon>\n          {{ category.name }}\n    </button>\n  </ion-list>\n\n</ion-card>\n</ion-content>\n'/*ion-inline-end:"C:\sper\newshots\sfat\fatafat\src\pages\category-list\category-list.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_wordpress_wordpress__["a" /* WordpressProvider */]])
     ], CategoryListPage);
@@ -164,6 +174,8 @@ var CategoryListPage = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PostPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_wordpress_wordpress__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_category_list_category_list__ = __webpack_require__(197);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -175,19 +187,59 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
+
+/**
+ * Generated class for the PostPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
 var PostPage = /** @class */ (function () {
-    function PostPage(navCtrl, navParams) {
+    function PostPage(navCtrl, navParams, wordpress) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.post = this.navParams.get("post");
+        this.wordpress = wordpress;
+        this.posts = [];
+        this.count = 1;
+        this.categoryId = this.navParams.get("categoryId");
     }
+    PostPage.prototype.ionViewDidLoad = function () {
+        var _this = this;
+        this.wordpress.retrievePostsInCategory(this.categoryId).subscribe(function (results) {
+            _this.posts = results;
+            console.log("cateposts", _this.posts);
+            _this.name = _this.posts[0].title.rendered;
+            _this.content = _this.posts[0].content.rendered;
+            _this.image = _this.posts[0].better_featured_image.source_url;
+        });
+    };
+    PostPage.prototype.swipeEvent = function (e) {
+        this.name = this.posts[this.count].title.rendered;
+        this.content = this.posts[this.count].content.rendered;
+        this.image = this.posts[this.count].better_featured_image.source_url;
+        this.count = this.count + 1;
+        console.log("count", this.count);
+        if (this.count == 5) {
+            this.count = 0;
+        }
+    };
+    PostPage.prototype.openCategories = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__pages_category_list_category_list__["a" /* CategoryListPage */]);
+    };
+    PostPage.prototype.loadCategory = function (id) {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__pages_category_list_category_list__["a" /* CategoryListPage */], {
+            categoryId: id
+        });
+    };
     PostPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-post',template:/*ion-inline-start:"C:\sper\newshots\sfat\fatafat\src\pages\post\post.html"*/'<ion-header>\n\n  <ion-navbar>\n    <ion-title>Post</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <h1>{{ post.title.rendered }}</h1>\n  <p [innerHTML]="post.content.rendered"></p>\n</ion-content>\n'/*ion-inline-end:"C:\sper\newshots\sfat\fatafat\src\pages\post\post.html"*/,
+            selector: 'page-post',template:/*ion-inline-start:"C:\sper\newshots\sfat\fatafat\src\pages\post\post.html"*/'\n\n<ion-content class="newscontainer">\n  <button ion-button float-left class="catbtn">\n    <ion-icon name="menu" (click)="openCategories()"></ion-icon>\n  </button>\n  <button ion-button float-right class="refbtn">\n    <ion-icon name="refresh"></ion-icon>\n  </button>\n  <ion-card (swipe)="swipeEvent($event)">\n    <div class="newsitem">\n      <div class="image">\n        <img src="{{image}}" />\n      </div>\n      <h2>{{ name }}</h2>\n      <p [innerHTML]="content"></p>\n    </div>\n </ion-card>\n\n</ion-content>\n'/*ion-inline-end:"C:\sper\newshots\sfat\fatafat\src\pages\post\post.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavParams */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__providers_wordpress_wordpress__["a" /* WordpressProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_wordpress_wordpress__["a" /* WordpressProvider */]) === "function" && _c || Object])
     ], PostPage);
     return PostPage;
+    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=post.js.map
@@ -221,7 +273,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(272);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_home_home__ = __webpack_require__(195);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_http__ = __webpack_require__(196);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__providers_wordpress_wordpress__ = __webpack_require__(99);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__providers_wordpress_wordpress__ = __webpack_require__(50);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_category_list_category_list__ = __webpack_require__(197);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_post_post__ = __webpack_require__(198);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_ionic_swipe_all__ = __webpack_require__(274);
@@ -330,7 +382,7 @@ var MyApp = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 99:
+/***/ 50:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -358,7 +410,7 @@ var WordpressProvider = /** @class */ (function () {
     }
     WordpressProvider.prototype.retrievePosts = function () {
         console.log("test1");
-        return this.http.get(this.baseUrl + 'posts')
+        return this.http.get(this.baseUrl + 'posts?per_page=20')
             .map(function (res) { return res.json(); });
     };
     WordpressProvider.prototype.retrieveCategories = function () {
