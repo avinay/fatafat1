@@ -16,23 +16,29 @@
 // automatically applied to the <body> element in the app.
 .card.card-md{
   width:100%;
-  height: 100%;
-  margin:0;
+  margin: 0;
+  box-shadow: none;
 }
-
-.image img{
-  max-width: 100%;
+.card.card-md h2{
+  font-size: 24px;
+  padding: 10px;
 }
-.newscontainer{
-  position: relative;
+.card.card-md p{
+  padding: 10px;
 }
-.newscontainer .refbtn{
+.newscontainer.content .button-md{
+  position:absolute;
+  background: transparent;
+}
+.newscontainer.content .button-md.refbtn {
+  right:0
+}
+.col{
+  min-height: 40px;
+}
+.socialshare{
   position: absolute;
-  right: 10px;
-  top:10px;
-}
-.newscontainer .catbtn{
-  position: absolute;
-  left: 10px;
-  top: 10px;
+    width: 100%;
+    bottom: 10px;
+    left: 0;
 }

@@ -1,24 +1,14 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Posts</ion-title>
+    <ion-title>Categories</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content>
-  <ion-card>
-    <ion-card-header>
-      Explore Categories
-    </ion-card-header>
-
-  <ion-list *ngIf="categories.length">
-    <button ion-item col-6 *ngFor="let category of categories" (click)="loadCategory(category?.id)">
-      <ion-icon name="medical" item-start></ion-icon>
-          {{ category.name }}
-    </button>
-  </ion-list>
-
-</ion-card>
+  <ion-item *ngFor="let category of categories" (click)="loadCategory(category?.id)">
+    {{ category?.name }}
+  </ion-item>
 </ion-content>

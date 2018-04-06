@@ -1,20 +1,13 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Post</ion-title>
+  </ion-navbar>
+
+</ion-header>
 
 
-<ion-content class="newscontainer">
-  <button ion-button float-left class="catbtn">
-    <ion-icon name="menu" (click)="openCategories()"></ion-icon>
-  </button>
-  <button ion-button float-right class="refbtn">
-    <ion-icon name="refresh"></ion-icon>
-  </button>
-  <ion-card (swipe)="swipeEvent($event)">
-    <div class="newsitem">
-      <div class="image">
-        <img src="{{image}}" />
-      </div>
-      <h2>{{ name }}</h2>
-      <p [innerHTML]="content"></p>
-    </div>
- </ion-card>
-
+<ion-content padding>
+  <h1>{{ post.title.rendered }}</h1>
+  <p [innerHTML]="post.content.rendered"></p>
 </ion-content>

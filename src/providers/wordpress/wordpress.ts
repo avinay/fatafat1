@@ -7,8 +7,12 @@ export class WordpressProvider {
 
   baseUrl: string = "https://avinay.com/fatafat/wp-json/wp/v2/"
 
-  constructor(public http: Http) {
+  public posts: any;
+  categoryId: number;
 
+
+  constructor(public http: Http) {
+console.log("1");
   }
 
   retrievePosts(){
@@ -22,7 +26,8 @@ export class WordpressProvider {
   }
 
   retrievePostsInCategory(categoryId: number){
-    return this.http.get(this.baseUrl + 'posts?categories=' + categoryId)
+    console.log("wcatid:", WordpressProvider.categoryId);
+    return this.http.get(this.baseUrl + 'posts?categories=' + WordpressProvider.categoryId)
     .map(res => res.json());
   }
 

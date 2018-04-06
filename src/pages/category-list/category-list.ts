@@ -9,32 +9,26 @@ import { HomePage } from './../home/home';
 })
 export class CategoryListPage {
 
-  categoryId: number;
-  posts: any = [];
-  categories: any = [];
+
+  categories: any;
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public wordpress: WordpressProvider) {
-    this.wordpress.retrieveCategories().subscribe(results => {
-      this.categories = results;
-      console.log("cate", this.categories);
-    });
+console.log("2");
   }
 
   ionViewDidLoad() {
-
-  }
-
-  loadCategory(id: number){
-    console.log("catid", id);
-    this.navCtrl.push(PostPage, {
-      categoryId: id
+    this.wordpress.retrieveCategories().subscribe(results => {
+      this.categories = results;
+      console.log("categories", this.categories);
     });
   }
 
-  openPost(post){
-    this.navCtrl.push(PostPage, {
-      post: post
-    });
-  }
+    loadCategory(id: number){
+        WordpressProvider.categoryId = id;
+      this.navCtrl.push(HomePage, {
+
+      });
+    }
 
 }

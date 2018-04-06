@@ -1,5 +1,3 @@
-
-
 <ion-content class="newscontainer">
   <button ion-button float-left class="catbtn">
     <ion-icon name="menu" (click)="openCategories()"></ion-icon>
@@ -7,13 +5,39 @@
   <button ion-button float-right class="refbtn">
     <ion-icon name="refresh" (click)="refreshApp()"></ion-icon>
   </button>
-  <ion-card (swipe)="swipeEvent($event)">
+  <ion-card id="newscard" (swipe)="swipeEvent($event)">
     <div class="newsitem">
       <div class="image">
         <img src="{{image}}" />
       </div>
       <h2>{{ name }}</h2>
       <p [innerHTML]="content"></p>
+    </div>
+    <div class="socialshare">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <button ion-button icon-only (click)="regularShare(i)" color="primary" clear>
+          <ion-icon ios="ios-share" md="md-share"></ion-icon>
+      </button>
+        </ion-col>
+        <ion-col>
+          <button ion-button icon-only (click)="whatsappShare(i)" color="primary" clear>
+         <ion-icon ios="logo-twitter" md="logo-twitter"></ion-icon>
+      </button>
+        </ion-col>
+        <ion-col>
+          <button ion-button icon-only (click)="facebookShare(i)" color="primary" clear>
+            <ion-icon  class="share-icon" name="logo-facebook"></ion-icon>
+      </button>
+        </ion-col>
+        <ion-col>
+          <button ion-button icon-only (click)="twitterShare(i)" color="primary" clear>
+        <ion-icon class="share-icon" name="logo-twitter"></ion-icon>
+      </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
     </div>
  </ion-card>
 
