@@ -7,8 +7,14 @@ import { CategoryListPage } from './../../pages/category-list/category-list';
   selector: 'page-home',
   templateUrl: 'home.html'
 })
+ngOnInit() {
+   this.viewCtrl.didEnter.subscribe(() => {
+      console.log('Component active');
+   });
+}
 export class HomePage {
 
+  categoryId: number;
   categories: any;
   posts: any;
   name: string;
@@ -16,8 +22,8 @@ export class HomePage {
   count: number = 1;
   image: string;
 
-  constructor(public navCtrl: NavController, public wordpress: WordpressProvider) {
-
+  constructor(public navCtrl: NavController, , public navParams: NavParams, public wordpress: WordpressProvider) {
+    this.categoryId = this.navParams.get("categoryId");
   }
 
   ionViewDidLoad(){
